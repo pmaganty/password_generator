@@ -10,6 +10,7 @@ var uppercase_char_str = "abcdefghijklmnopqrstuvwxyz";
 var lowercase_char_str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var number_char_str = "0123456789";
 var password = "";
+var end_app = false;
 /***************************END OF VARIABLES***************************/
 
 
@@ -18,19 +19,31 @@ var password = "";
 /*************************FUNCTION DEFINITIONS*************************/
 function get_password_length() {
     password_length = prompt("Please enter a password length between 8 and 128 characters.");
-    while (password_length < 8 || password_length > 128) {
+    if (password_length == false) {
+        end_app = true;
+    }
+    while (password_length < 8 || password_length > 128 || isNaN(password_length)) {
         password_length = prompt("The length you entered is invalid. Please enter a password length between 8 and 128 characters.");
+        if (password_length == false) {
+            end_app = true;
+        }
     }
 }
 
 function get_preferences() {
+    var keep_going;
     special_char = confirm("Would you like your password to contain special characters?");
     numeric_char = confirm("Would you like your password to contain numeric characters?");
     uppercase_char = confirm("Would you like your password to contain uppercase letters?");
     lowercase_char = confirm("Would you like your password to contain lowercase letters?");
     while (special_char == false && numeric_char == false && uppercase_char == false && lowercase_char == false) {
-        confirm("You have not chosen any password preferences. Please press OK to specify your preferences.");
+        keep_going = confirm("You have not chosen any password preferences. Please press OK to specify your preferences.");
+        if (keep_going == true) {
         get_preferences();
+        } else {
+            end_app = true;
+            special_char = true;
+        }
     }
 }
 
@@ -113,11 +126,19 @@ function create_password_string() {
 
 function generate_password() {
     get_password_length();
-    get_preferences();
-    create_preference_arr();
-    create_password_string();
+    if (end_app == false) {
+        get_preferences();
+    }
+    if (end_app == false) {
+        create_preference_arr();
+        create_password_string();
+    }
 }
 /*************************END OF FUNCTIONS*************************/
+
+
+
+
 
 generate_password();
 alert("Your generated PASSWORD is: " + password);
