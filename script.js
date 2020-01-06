@@ -19,15 +19,17 @@ var end_app = false;
 /*************************FUNCTION DEFINITIONS*************************/
 function get_password_length() {
     password_length = prompt("Please enter a password length between 8 and 128 characters.");
-    if (password_length == false) {
+    if (!password_length && password_length != "") {
         end_app = true;
-    }
-    while (password_length < 8 || password_length > 128 || isNaN(password_length)) {
-        password_length = prompt("The length you entered is invalid. Please enter a password length between 8 and 128 characters.");
-        if (password_length == false) {
-            end_app = true;
+    } else {
+        while ((password_length < 8 || password_length > 128 || password_length === "" || isNaN(password_length)) && !end_app) {
+            password_length = prompt("The length you entered is invalid. Please enter a password length between 8 and 128 characters.");
+            if (!password_length && password_length != "") {
+                end_app = true;
+                console.log(end_app);
+            }
         }
-    }
+    }   
 }
 
 function get_preferences() {
@@ -133,12 +135,14 @@ function generate_password() {
         create_preference_arr();
         create_password_string();
     }
+
+    alert("Your generated PASSWORD is: " + password);
+
+    var targetDiv = document.getElementById("result");
+    targetDiv.textContent = password;    
 }
 /*************************END OF FUNCTIONS*************************/
 
+document.getElementById("generate_button").addEventListener("click", generate_password);
 
-
-
-
-generate_password();
-alert("Your generated PASSWORD is: " + password);
+//alert("Your generated PASSWORD is: " + password);
