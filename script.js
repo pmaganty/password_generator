@@ -11,6 +11,8 @@ var lowercase_char_str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var number_char_str = "0123456789";
 var password = "";
 var end_app = false;
+
+var targetInput = document.getElementById("result_input_box");
 /***************************END OF VARIABLES***************************/
 
 
@@ -127,7 +129,12 @@ function create_password_string() {
 }
 
 function generate_password() {
+    type_arr = [];
+    password = "";
+    end_app = false;
+
     get_password_length();
+    console.log(end_app);
     if (end_app == false) {
         get_preferences();
     }
@@ -136,13 +143,25 @@ function generate_password() {
         create_password_string();
     }
 
-    alert("Your generated PASSWORD is: " + password);
+    if (end_app == false) {
+        alert("Your generated PASSWORD is: " + password);
+    } else {
+        alert("You canceled the password generation.")
+    }
 
-    var targetDiv = document.getElementById("result");
-    targetDiv.textContent = password;    
+    //var targetInput = document.getElementById("result_input_box");
+    targetInput.setAttribute("value", password);
 }
 /*************************END OF FUNCTIONS*************************/
 
 document.getElementById("generate_button").addEventListener("click", generate_password);
+
+function copyToClipboard() {
+  var copyText = document.getElementById("result_input_box"); 
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+}
 
 //alert("Your generated PASSWORD is: " + password);
