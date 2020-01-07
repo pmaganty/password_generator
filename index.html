@@ -15,25 +15,24 @@
     <body>
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <h1 class="col-sm-12 col-md-12 col-lg-9 title">Password Generator</h1>
+                <h1 class="col-sm-12 col-md-12 col-lg-12 title">Password Generator</h1>
             </div>
             <div class="row justify-content-center">
-                <div class="col-sm-12 col-md-12 col-lg-7" id="result_box">
-                    <!--
-                    <p id="result">
-                        Your Secure Password
-                    </p>
-                    -->
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-12"> 
-                            <input type="text" value="Your Secure Password" id="result_input_box">   
-                        </div>
+                <div class="col-sm-12 col-md-12 col-lg-9 content">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12 col-md-12 col-lg-7" id="result_box">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12"> 
+                                    <textarea rows="3" id="result_text_area"></textarea> 
+                                </div>
+                            </div>
+                        </div>                
                     </div>
-                </div>                
-            </div>
-            <div class="row justify-content-center">
-                    <button id="generate_button">Generate Password</button>
-                    <button id="copy_button" onclick="copyToClipboard()">Copy to CLipboard</button>
+                    <div class="row justify-content-center">
+                            <button id="generate_button">Generate Password</button>
+                            <button id="copy_button" onclick="copyToClipboard()">Copy to Clipboard</button>
+                    </div>
+                </div>
             </div>
         </div>
 

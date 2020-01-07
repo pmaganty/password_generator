@@ -13,6 +13,7 @@ var password = "";
 var end_app = false;
 
 var targetInput = document.getElementById("result_input_box");
+var targetTextArea = document.getElementById("result_text_area");
 /***************************END OF VARIABLES***************************/
 
 
@@ -66,63 +67,38 @@ function create_preference_arr() {
     }
 }
 
-/*PRINTING ARRAY FOR DEBUG CODE*/
-function print_preference_arr() {
-    for (var i = 0; i < type_arr.length; i++) {
-        console.log(type_arr[i]);
-    }
-}
-/*-----------------------------*/
-
 function create_password_string() {
     for (var j = 0; j < password_length; j++) {
-        //console.log(j); //FOR DEBUG
 
         var rand_val;
         var rand_char_type;
 
         if (j == 0 && special_char == true) {
             rand_val = Math.floor(Math.random() * special_char_str.length);
-            //console.log(rand_val); //FOR DEBUG
             password += special_char_str[rand_val];
-            //console.log(password); //FOR DEBUG
         } else if (j == 1 && uppercase_char == true) {
             rand_val = Math.floor(Math.random() * uppercase_char_str.length);
-            //console.log(rand_val) //FOR DEBUG
             password += uppercase_char_str[rand_val];
-            //console.log(password); //FOR DEBUG
         } else if (j == 2 && lowercase_char == true) {
             rand_val = Math.floor(Math.random() * lowercase_char_str.length);
-            //console.log(rand_val) //FOR DEBUG
             password += lowercase_char_str[rand_val];
-            //console.log(password); //FOR DEBUG
         } else if ( j == 3 && numeric_char == true) {
             rand_val = Math.floor(Math.random() * number_char_str.length);
-            //console.log(rand_val) //FOR DEBUG
-            password += number_char_str[rand_val];  
-            //console.log(password); //FOR DEBUG     
+            password += number_char_str[rand_val];       
         } else {
             rand_char_type = Math.floor(Math.random() * type_arr.length);
             if (type_arr[rand_char_type] == "s") {
                 rand_val = Math.floor(Math.random() * special_char_str.length);
-                //console.log(rand_val) //FOR DEBUG
                 password += special_char_str[rand_val];
-                //console.log(password); //FOR DEBUG
             } else if (type_arr[rand_char_type] == "n") {
                 rand_val = Math.floor(Math.random() * number_char_str.length);
-                //console.log(rand_val) //FOR DEBUG
                 password += number_char_str[rand_val];
-                //console.log(password); //FOR DEBUG
             } else if (type_arr[rand_char_type] == "l") {
                 rand_val = Math.floor(Math.random() * lowercase_char_str.length);
-                //console.log(rand_val) //FOR DEBUG
                 password += lowercase_char_str[rand_val];
-                //console.log(password); //FOR DEBUG
             } else {
                 rand_val = Math.floor(Math.random() * uppercase_char_str.length);
-                //console.log(rand_val) //FOR DEBUG
                 password += uppercase_char_str[rand_val];
-                //console.log(password); //FOR DEBUG
             }
         }
     }
@@ -134,7 +110,7 @@ function generate_password() {
     end_app = false;
 
     get_password_length();
-    console.log(end_app);
+
     if (end_app == false) {
         get_preferences();
     }
@@ -144,24 +120,23 @@ function generate_password() {
     }
 
     if (end_app == false) {
-        alert("Your generated PASSWORD is: " + password);
+        targetTextArea.textContent = password;
     } else {
-        alert("You canceled the password generation.")
+        alert("You canceled the password generation.");
     }
 
-    //var targetInput = document.getElementById("result_input_box");
-    targetInput.setAttribute("value", password);
+    targetTextArea.textContent = password;
+}
+
+function copyToClipboard() {
+    var copyText = document.getElementById("result_text_area"); 
+    copyText.select();
+    copyText.setSelectionRange(0, 99999)
+    document.execCommand("copy");
+    alert("Copied the text: " + copyText.value);
 }
 /*************************END OF FUNCTIONS*************************/
 
+//Every time generate password button is pressed, the process will kick off
 document.getElementById("generate_button").addEventListener("click", generate_password);
 
-function copyToClipboard() {
-  var copyText = document.getElementById("result_input_box"); 
-  copyText.select();
-  copyText.setSelectionRange(0, 99999)
-  document.execCommand("copy");
-  alert("Copied the text: " + copyText.value);
-}
-
-//alert("Your generated PASSWORD is: " + password);
