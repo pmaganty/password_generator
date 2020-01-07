@@ -16,4 +16,3 @@ Contents:
 --------------------------------
 
 Snapshot:
-![image info](./website_screenshot.png)
